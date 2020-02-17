@@ -1,3 +1,15 @@
+Note:
+
+Upgraded Spring-boot version. One of the benefit: it has sort out the marshaling and unmarshaling triggered by @RequestBody and @ResponseBody through jackson library.
+
+Added lombok to remove boilerplate code like getter, setter, constractor etc.
+
+You can run the application through postman
+
+url: http://localhost:8080/busy-flights/flights
+method: POST
+json: {"origin":"aaa","destination":"bbb","departureDate":"2020-02-16","returnDate":"2020-02-16","numberOfPassengers":2}
+
 **Travix - Problem to be solved**
 
 **Background:**

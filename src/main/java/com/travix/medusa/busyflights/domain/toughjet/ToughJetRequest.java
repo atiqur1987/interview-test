@@ -1,50 +1,27 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
 public class ToughJetRequest {
 
+    @NotNull
+    @Size(min = 3, max = 3, message = "The from IATA code size must be 3 character")
     private String from;
+    @NotNull
+    @Size(min = 3, max = 3, message = "The destination IATA code size cannot exceed 3 character")
     private String to;
-    private String outboundDate;
-    private String inboundDate;
+    @NotNull
+    private LocalDate outboundDate; //ISO_LOCAL_DATE
+    @NotNull
+    private LocalDate inboundDate; //ISO_LOCAL_DATE
+    @NotNull
     private int numberOfAdults;
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(final String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(final String to) {
-        this.to = to;
-    }
-
-    public String getOutboundDate() {
-        return outboundDate;
-    }
-
-    public void setOutboundDate(final String outboundDate) {
-        this.outboundDate = outboundDate;
-    }
-
-    public String getInboundDate() {
-        return inboundDate;
-    }
-
-    public void setInboundDate(final String inboundDate) {
-        this.inboundDate = inboundDate;
-    }
-
-    public int getNumberOfAdults() {
-        return numberOfAdults;
-    }
-
-    public void setNumberOfAdults(final int numberOfAdults) {
-        this.numberOfAdults = numberOfAdults;
-    }
 }

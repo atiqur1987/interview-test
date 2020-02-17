@@ -1,50 +1,28 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
 public class BusyFlightsRequest {
 
+    @NotNull
+    @Size(min = 3, max = 3, message = "The origin IATA code size must be 3 character")
     private String origin;
+    @NotNull
+    @Size(min = 3, max = 3, message = "The destination IATA code size cannot exceed 3 character")
     private String destination;
-    private String departureDate;
-    private String returnDate;
-    private int numberOfPassengers;
+    @NotNull
+    private LocalDate departureDate; //ISO_LOCAL_DATE
+    @NotNull
+    private LocalDate returnDate; //ISO_LOCAL_DATE
+    @Max(value = 4, message = "numberOfPassengers cannot be greater than 4")
+    private Integer numberOfPassengers;
 
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(final String origin) {
-        this.origin = origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(final String destination) {
-        this.destination = destination;
-    }
-
-    public String getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(final String departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public String getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(final String returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public int getNumberOfPassengers() {
-        return numberOfPassengers;
-    }
-
-    public void setNumberOfPassengers(final int numberOfPassengers) {
-        this.numberOfPassengers = numberOfPassengers;
-    }
 }
