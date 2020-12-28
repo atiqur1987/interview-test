@@ -1,5 +1,6 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ToughJetRequest {
 
     @NotNull
@@ -23,5 +25,4 @@ public class ToughJetRequest {
     private LocalDate inboundDate; //ISO_LOCAL_DATE
     @NotNull
     private int numberOfAdults;
-
 }

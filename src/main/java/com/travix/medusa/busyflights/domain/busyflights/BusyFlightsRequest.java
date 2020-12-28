@@ -1,5 +1,6 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BusyFlightsRequest {
 
     @NotNull
@@ -24,5 +26,4 @@ public class BusyFlightsRequest {
     private LocalDate returnDate; //ISO_LOCAL_DATE
     @Max(value = 4, message = "numberOfPassengers cannot be greater than 4")
     private Integer numberOfPassengers;
-
 }

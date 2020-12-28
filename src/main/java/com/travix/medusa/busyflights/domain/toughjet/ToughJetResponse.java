@@ -1,5 +1,6 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.time.Instant;
 
 @Data
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ToughJetResponse {
 
     @NotNull
@@ -29,5 +31,4 @@ public class ToughJetResponse {
     private Instant outboundDateTime;    //ISO_INSTANT
     @NotNull
     private Instant inboundDateTime;     //ISO_INSTANT
-
 }

@@ -17,5 +17,4 @@ public class RestClientTemplate {
         T response = this.restTemplate.postForObject(uri, request, responseType);
         return response;
     }
-
 }

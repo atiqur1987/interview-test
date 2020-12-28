@@ -6,12 +6,15 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.service.BusyFlightsService;
+import com.travix.medusa.busyflights.service.PriceCalculatorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,14 +26,15 @@ import java.util.List;
 
 import static java.time.LocalDateTime.now;
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                classes = PriceCalculatorService.class))
 class BusyFlightsControllerTest {
 
     private final static String URI = "/busy-flights/flights";
@@ -51,6 +55,9 @@ class BusyFlightsControllerTest {
 
     @Test
     void testGetFlights() throws Exception {
+
+        ObjectMapper o = new ObjectMapper();
+
         List<BusyFlightsResponse> expectedResponse = asList(BusyFlightsResponse.builder()
                 .airline("CrazyAir")
                 .supplier("Atiqur")
@@ -72,6 +79,5 @@ class BusyFlightsControllerTest {
                 .andReturn();
 
         assertEquals(objectMapper.writeValueAsString(expectedResponse), result.getResponse().getContentAsString());
-
     }
 }
